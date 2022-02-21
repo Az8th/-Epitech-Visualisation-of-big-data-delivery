@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-./project_description.pdf
-./data.csv
+project_description.pdf
+data.csv
+marketing_sample_for_amazon_com-amazon_com_product__20210401_20210430__30k_data.csv
