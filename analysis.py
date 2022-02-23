@@ -63,7 +63,59 @@ def np_unknown_cat(acc, arr):
 	else:
 		return np.concatenate((acc, arrE))
 
+def average_car_weight_by_country():
+	class average:
+		def __init__(self):
+			self.sum_weight = 0.0
+			self.nb = 0.0
+		def increment(self, value):
+			self.nb += 1
+			self.sum_weight += value
+		def g_av(self):
+			return (self.sum_weight/self.nb)
+	
+	av_us_w = average()
+	av_eu_w = average()
+	av_jap_w = average()
+
+	for it in range(len(num_arr)):
+		if (num_arr[it][8] == "US"): 
+			av_us_w.increment(float(num_arr[it][5]))
+		if (num_arr[it][8] == "Europe"):
+			av_eu_w.increment(float(num_arr[it][5]))
+		if (num_arr[it][8] == "Japan"):
+			av_jap_w.increment(float(num_arr[it][5]))
+	
+	print("Us-Average_Weight: %.2f, Eu-Average_Weight: %.2f, Jap-Average_Weight: %.2f" % (av_us_w.g_av(), av_eu_w.g_av(), av_jap_w.g_av()))
+
+def average_horse_power_by_country():
+	class average:
+		def __init__(self):
+			self.sum_hp = 0.0
+			self.nb = 0.0
+		def increment(self, value):
+			self.nb += 1
+			self.sum_hp += value
+		def g_av(self):
+			return (self.sum_hp/self.nb)
+	
+	av_us_hp = average()
+	av_eu_hp = average()
+	av_jap_hp = average()
+
+	for it in range(len(num_arr)):
+		if (num_arr[it][8] == "US"): 
+			av_us_hp.increment(float(num_arr[it][4]))
+		if (num_arr[it][8] == "Europe"):
+			av_eu_hp.increment(float(num_arr[it][4]))
+		if (num_arr[it][8] == "Japan"):
+			av_jap_hp.increment(float(num_arr[it][4]))
+	
+	print("Us-Average_Horsep: %.2f, Eu-Average_Horsep: %.2f, Jap-Average_Horsep: %.2f" % (av_us_hp.g_av(), av_eu_hp.g_av(), av_jap_hp.g_av()))
+
 cars_production_by_country()
 corr_horsepower_cylinder()
 corr_horsepower_weight()
 corr_horseower_displacement()
+average_horse_power_by_country()
+average_car_weight_by_country()
