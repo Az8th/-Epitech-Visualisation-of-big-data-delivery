@@ -28,25 +28,20 @@ def cars_production_by_country():
 
 def potential_outliers():
 	m, b = np.polyfit(df["Acceleration"], df["Displacement"], 1)
-	outliers = pd.DataFrame(columns=["Car","MPG","Cylinders","Displacement","Horsepower","Weight","Acceleration","Model","Origin"])
-	others = pd.DataFrame(columns=["Car","MPG","Cylinders","Displacement","Horsepower","Weight","Acceleration","Model","Origin"])
-	nb_tmp = 0
-	nb_tmp2 = 0
+	outliers = []
+	others = []
 	for it in range(len(df)):
 		if (df["Displacement"][it] > m * df["Acceleration"][it] + b):
-			nb_tmp += 1
-			new_outliers = pd.concat([outliers, df.loc[df['Displacement'] == df["Displacement"][it]]])
+			outliers.append(df.loc[df['Displacement'] == df["Displacement"][it]])
 		else:
-			nb_tmp2 += 1
-			new_others = pd.concat([others, df.loc[df['Displacement'] == df["Displacement"][it]]])
-	print(range(len(df)))
-	print(nb_tmp)
-	print(nb_tmp2)
+			others.append(df.loc[df['Displacement'] == df["Displacement"][it]])
+	final_outliers = pd.concat(outliers)
+	final_others = pd.concat(others)
 	plt.plot(df["Acceleration"], m*df["Acceleration"] + b)
-	fig = new_others.plot.scatter(x="Acceleration", y="Displacement", c="DarkBlue").get_figure()
-	fig = new_outliers.plot.scatter(x="Acceleration", y="Displacement", c="Red").get_figure()
-	fig = plt.gcf()
-	fig.savefig("Displacement_vs_Acceleration.png")
+	ax = plt.gca()
+	final_others.plot.scatter(x="Acceleration", y="Displacement", c="DarkBlue", ax=ax)
+	final_outliers.plot.scatter(x="Acceleration", y="Displacement", c="Red", ax=ax)
+	plt.savefig("Displacement_vs_Acceleration.png")
 
 
 def corr_horsepower_cylinder():
@@ -152,7 +147,6 @@ def average_horse_power_by_country():
 	plt.ylabel("Horse power Average")
 	plt.xlabel("Region of production")
 	plt.bar(dict_horsepower_by_country.keys(), dict_horsepower_by_country.values())
-	plt.show()
 	plt.savefig("Average_car_horse_power_by_country_of_production.png")
 	plt.close()
 
