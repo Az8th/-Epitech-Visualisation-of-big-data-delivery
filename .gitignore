@@ -51,8 +51,8 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-*.png
-cars.csv
+#*.png
+#cars.csv
 
 # Translations
 *.mo
