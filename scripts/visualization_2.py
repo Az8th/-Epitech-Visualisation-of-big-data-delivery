@@ -31,7 +31,7 @@ def visualisation():
 	plt.savefig("../visu/visu_2.png")
 
 try:
-	opts, args = getopt.getopt(sys.argv[1:], ["h", ":x", ":y"], ["help","xaxis=", "yaxis=", "min=", "max="])
+	opts, args = getopt.getopt(sys.argv[1:], "hx:y", ["help","xaxis=", "yaxis=", "min=", "max="])
 	for name, value in opts:
 		if name in ['-h', '--help']: 
 			print("Usage: python3 visualizarion_1.py --xaxis --yaxis [-h] [--min] [--max]\n\t--xaxis - Absisses features, default value: \"Acceleration\"\n\t--yaxis - Ordinate features, default value: \"Dispacement\"\n\tFeatures list: %s\n\t[--min] - Range min option\n\t[--max] - Range max option\n\t[--help] - Help command" % (str(features)))
