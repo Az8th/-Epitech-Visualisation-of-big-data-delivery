@@ -16,12 +16,12 @@ features = [
 	"Origin"
 ]
 
+df = pd.read_csv("../datasets/cars.csv", delimiter=",")
+max_range = len(df.index)
+min_range = 0
 xaxis = 6
 yaxis = 3
-max_range = 406
-min_range = 0
-df = pd.read_csv("../datasets/cars.csv", delimiter=",")
-    
+
 def visualisation():
 	df_range = df.iloc[min_range:max_range]
 	plt.scatter(df_range[features[xaxis]], df_range[features[yaxis]])
