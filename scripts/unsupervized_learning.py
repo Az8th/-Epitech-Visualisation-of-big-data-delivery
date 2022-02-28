@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import sys
-import getopt
-import pandas as pd
+import pandas as psd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from optparse import OptionParser
