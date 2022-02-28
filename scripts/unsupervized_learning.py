@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import pandas as psd
+import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from optparse import OptionParser
