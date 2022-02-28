@@ -3,55 +3,34 @@ import sys
 import getopt
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+from optparse import OptionParser
 
-features = [
-	"Car",
-	"MPG",
-	"Cylinders",
-	"Displacement",
-	"Horsepower",
-	"Weight",
-	"Acceleration",
-	"Model",
-	"Origin"
-]
+#Options parsing
+parser = OptionParser()
+parser.add_option("-o", "--output", dest="filename", metavar="FILE", default="../visu/visu_cluster.png", help="write result to FILE")
+parser.add_option("-c", "--clusters", action="store", type="int", dest="columns", default=3, help="number of CLUSTERS needed")
+parser.add_option("-s", "--show", action="store_true", dest="show", default=False, help="show the result rather than saving it to FILE")
+(options, args) = parser.parse_args()
 
+#Parse Dataset
 df = pd.read_csv("../datasets/cars.csv", delimiter=",")
-max_range = len(df.index)
-min_range = 0
-xaxis = 6
-yaxis = 3
+df = df.drop(["Car", "MPG", "Cylinders", "Acceleration", "Model", "Origin"], axis="columns")
 
-def visualisation():
-	df_range = df.iloc[min_range:max_range]
-	plt.scatter(df_range[features[xaxis]], df_range[features[yaxis]])
-	plt.xlabel(features[xaxis])
-	plt.ylabel(features[yaxis])
-	plt.title(features[xaxis] + " vs " + features[yaxis])
-	plt.savefig("../visu/visu_1.png")
+#Clustering with Kmeans algorithm (kmeans++ avoids bad initialization of centroids)
+kmeans = KMeans(n_clusters=options.clusters, init='k-means++').fit(df)
+centroids = kmeans.cluster_centers_
 
-try:
-	opts, args = getopt.getopt(sys.argv[1:], "hx:y", ["help","xaxis=", "yaxis=", "min=", "max="])
-	for name, value in opts:
-		if name in ['-h', '--help']: 
-			print("Usage: python3 visualizarion_1.py --xaxis --yaxis [-h] [--min] [--max]\n\t--xaxis - Absisses features, default value: \"Acceleration\"\n\t--yaxis - Ordinate features, default value: \"Dispacement\"\n\tFeatures list: %s\n\t[--min] - Range min option\n\t[--max] - Range max option\n\t[--help] - Help command" % (str(features)))
-		elif name in ['-x', "--xaxis"]:
-			xaxis = int(value)
-		elif name in ["-y", '--yaxis']:
-			yaxis = int(value)
-		elif name in ['--min']:
-			if int(value) < 0 & int(value) > 406:
-				raise Exception("Min out of range")
-			min_range = int(value)
-		elif name in ['--max']:
-			if int(value) < 0 & int(value) > 406:
-				raise Exception("Min out of range")
-			max_range = int(value)
-except getopt.GetoptError as err:
-	print(err)
-	sys.exit(2)
-
-visualisation()
-	
-      
-
+#Graph generation
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.scatter3D(df['Displacement'], df['Horsepower'], df['Weight'], c = kmeans.labels_.astype(float), s=10, alpha=0.5)
+ax.scatter3D(centroids[:, 0], centroids[:, 1], centroids[:, 2], c='red', s=50)
+ax.set_xlabel('Displacement')
+ax.set_ylabel('Horsepower')
+ax.set_zlabel('Weight')
+ax.set_title("Displacement vs Horsepower vs Weight")
+if options.show:
+    plt.show()
+else:
+    fig.savefig(options.filename)
