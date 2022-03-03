@@ -49,5 +49,4 @@ def predict_weight():
 	print("Différence moyenne entre le dataset et le modèle: %.2f Kg" % diff)
 	return
 
-
 predict_weight()

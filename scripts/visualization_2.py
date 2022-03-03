@@ -15,6 +15,7 @@ features = [
 	"Model",
 	"Origin"
 ]
+
 df = pd.read_csv("../datasets/cars.csv", delimiter=",")
 max_range = len(df.index)
 min_range = 0
