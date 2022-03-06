@@ -24,7 +24,7 @@ parser.add_option("-d", "--data", action="callback", type="string", dest="column
 (options, args) = parser.parse_args()
 
 #Parse Dataset
-raw_df = pd.read_csv("../datasets/cars.csv", delimiter=",")
+raw_df = pd.read_csv("data.csv", delimiter=",")
 if (len(options.columns) not in range(2,4)):
     print("Error: Incorrect amount of dimensions")
     exit(1)
@@ -39,6 +39,8 @@ kmeans = KMeans(n_clusters=options.clusters, init='k-means++', random_state=0).f
 kmeans.predict(df)
 centroids = kmeans.cluster_centers_
 raw_df['Cluster'] = kmeans.labels_.astype(int)
+
+#Transform cluster attribution to number of cylinders (2, 4 or 8)
 raw_df['Cluster'] = raw_df['Cluster'].apply(lambda x:2 ** (x + 1))
 
 #Graph generation
