@@ -16,7 +16,7 @@ features = [
 	"Origin"
 ]
 
-df = pd.read_csv("../datasets/cars.csv", delimiter=",")
+df = pd.read_csv("data.csv", delimiter=",")
 max_range = len(df.index)
 min_range = 0
 xaxis = 6

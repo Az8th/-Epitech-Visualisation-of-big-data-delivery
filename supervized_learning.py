@@ -15,7 +15,7 @@ class average:
 			return (self.sum_cal/self.nb)
 
 
-df = pd.read_csv("../datasets/cars.csv", delimiter=",")
+df = pd.read_csv("data.csv", delimiter=",")
 
 def preprocess_dataset():
 	le_origin, le_origin_1 = LabelEncoder(), LabelEncoder()

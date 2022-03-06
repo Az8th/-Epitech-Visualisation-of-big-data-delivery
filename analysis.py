@@ -263,8 +263,8 @@ def average_displacement_by_country():
 	plt.close()
 
 
-df = pd.read_csv("../datasets/cars.csv", delimiter=",")
-df_algo = pd.read_csv("../datasets/cars_algo.csv", delimiter=",")
+df = pd.read_csv("data.csv", delimiter=",")
+df_algo = pd.read_csv("data_algo.csv", delimiter=",")
 cars_production_by_country()
 corr_graphic(corr_horsepower_cylinder(), corr_horsepower_weight(), corr_horsepower_displacement(), corr_horsepower_origin(), corr_horsepower_acceleration(), corr_horsepower_MPG(), corr_horsepower_model())
 average_horse_power_by_country()

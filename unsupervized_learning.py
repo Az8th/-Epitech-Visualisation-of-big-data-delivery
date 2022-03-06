@@ -12,7 +12,7 @@ parser.add_option("-s", "--show", action="store_true", dest="show", default=Fals
 (options, args) = parser.parse_args()
 
 #Parse Dataset
-df = pd.read_csv("../datasets/cars.csv", delimiter=",")
+df = pd.read_csv("data.csv", delimiter=",")
 df = df.drop(["Car", "MPG", "Cylinders", "Acceleration", "Model", "Origin"], axis="columns")
 
 #Clustering with Kmeans algorithm (kmeans++ avoids bad initialization of centroids)
