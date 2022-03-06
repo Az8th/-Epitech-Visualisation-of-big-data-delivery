@@ -21,7 +21,7 @@ def cars_production_by_country():
 		dict_country[df["Origin"][it]] = dict_country.get(df["Origin"][it], 0) + 1
 	plt.pie(dict_country.values(), labels=dict_country.keys(), autopct='%1.1f%%')
 	plt.title("Comparative of the number of produced cars in different regions")
-	plt.savefig("../visu/nb_car_by_origin.png")
+	plt.savefig("./nb_car_by_origin.png")
 	plt.close()
 
 def preprocess_dataset():
@@ -66,12 +66,12 @@ def potential_outliers():
 	plt.scatter(df_good["Acceleration"], df_good["Displacement"], c="DarkBlue")
 	plt.ylabel("Displacement")
 	plt.xlabel("Acceleration")
-	plt.savefig("../visu/decistion_tree.png")
+	plt.savefig("./decistion_tree.png")
 	plt.close()
 	plt.bar(["US", "Europe", "Japan"], [from_america, from_europe, from_japan])
 	plt.ylabel("Number of inneficient car(s)")
 	plt.xlabel("Origin of cars")
-	plt.savefig("../visu/bad_cars_by_region.png")
+	plt.savefig("./bad_cars_by_region.png")
 	plt.close()
 	return
 
@@ -171,7 +171,7 @@ def corr_graphic(corr1, corr2, corr3, corr4, corr5, corr6, corr7):
 	ax.set_xmargin(0)
 	plt.ylabel("Pearson's coefficient")
 	plt.xlabel("Correlations with Cylinder")
-	plt.savefig("../visu/correlation.png")
+	plt.savefig("./correlation.png")
 	plt.close()
 
 
@@ -213,7 +213,7 @@ def average_car_weight_by_country():
 	plt.bar(dict_car_weight_by_country.keys(), dict_car_weight_by_country.values())
 	plt.ylabel("Average car weight")
 	plt.xlabel("Region of production")
-	plt.savefig("../visu/Average_car_weight_by_country_of_production.png")
+	plt.savefig("./Average_car_weight_by_country_of_production.png")
 	plt.close()
 
 ## Calcul de la puissance moyenne d'une voiture par région
@@ -236,7 +236,7 @@ def average_horse_power_by_country():
 	plt.ylabel("Horse power Average")
 	plt.xlabel("Region of production")
 	plt.bar(dict_horsepower_by_country.keys(), dict_horsepower_by_country.values())
-	plt.savefig("../visu/Average_car_horse_power_by_country_of_production.png")
+	plt.savefig("./Average_car_horse_power_by_country_of_production.png")
 	plt.close()
 
 ## Calcul de la puissance moyenne d'une voiture par région
@@ -259,7 +259,7 @@ def average_displacement_by_country():
 	plt.ylabel("Displacement Average")
 	plt.xlabel("Region of production")
 	plt.bar(dict_displacement_by_country.keys(), dict_displacement_by_country.values())
-	plt.savefig("../visu/Average_car_displacement_by_country_of_production.png")
+	plt.savefig("./Average_car_displacement_by_country_of_production.png")
 	plt.close()
 
 

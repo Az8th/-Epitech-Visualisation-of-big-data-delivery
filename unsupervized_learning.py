@@ -6,7 +6,7 @@ from optparse import OptionParser
 
 #Options parsing
 parser = OptionParser()
-parser.add_option("-o", "--output", dest="filename", metavar="FILE", default="../visu/visu_cluster.png", help="write result to FILE")
+parser.add_option("-o", "--output", dest="filename", metavar="FILE", default="./visu_cluster.png", help="write result to FILE")
 parser.add_option("-c", "--clusters", action="store", type="int", dest="clusters", default=3, help="number of CLUSTERS needed")
 parser.add_option("-s", "--show", action="store_true", dest="show", default=False, help="show the result rather than saving it to FILE")
 (options, args) = parser.parse_args()

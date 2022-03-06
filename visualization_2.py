@@ -28,7 +28,7 @@ def visualisation():
 	plt.xlabel(features[xaxis])
 	plt.ylabel(features[yaxis])
 	plt.title(features[xaxis] + " vs " + features[yaxis])
-	plt.savefig("../visu/visu_2.png")
+	plt.savefig("./visu_2.png")
 
 try:
 	opts, args = getopt.getopt(sys.argv[1:], "hx:y", ["help","xaxis=", "yaxis=", "min=", "max="])
